@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TeacherScreenController">
+   <top>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="156.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../LogoHCMUS.png" />
+               </image>
+            </ImageView>
+            <FontAwesomeIconView fx:id="signOut" fill="#076eed" glyphName="SIGN_OUT" layoutX="831.0" layoutY="85.0" onMouseClicked="#logOut" size="30.0" />
+            <FontAwesomeIconView fx:id="curAccount" fill="#076eed" glyphName="USER" layoutX="779.0" layoutY="85.0" onMouseClicked="#checkAccount" size="30.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <GridPane hgap="20.0" style="-fx-background-color: lightgray;" vgap="20.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <AnchorPane fx:id="courseList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#courseManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="BOOK" layoutX="110.0" layoutY="102.0" size="70.0" />
+                  <Label layoutX="48.0" layoutY="113.0" style="-fx-background-color: white;" text="QUẢN LÝ HỌC PHẦN" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="semesterList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#semesterManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="CALENDAR" layoutX="104.0" layoutY="101.0" size="70.0" text="" />
+                  <Label layoutX="103.0" layoutY="112.0" style="-fx-background-color: white;" text="HỌC KỲ" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="subjectList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#subjectManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="BOOK" layoutX="110.0" layoutY="102.0" size="70.0" />
+                  <Label layoutX="56.0" layoutY="113.0" style="-fx-background-color: white;" text="QUẢN LÝ MÔN HỌC" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="studentList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#studentManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="USER" layoutX="110.0" layoutY="102.0" size="70.0" />
+                  <Label layoutX="65.0" layoutY="113.0" style="-fx-background-color: white;" text="QL SV / LỚP HỌC" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="classList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#classManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="INSTITUTION" layoutX="97.0" layoutY="101.0" size="70.0" text="" />
+                  <Label layoutX="56.0" layoutY="113.0" style="-fx-background-color: white;" text="QUẢN LÝ LỚP HỌC" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="teacherList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#teacherManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <opaqueInsets>
+                  <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+               </opaqueInsets>
+               <children>
+                  <FontAwesomeIconView fill="#076eed" glyphName="USER" layoutX="110.0" layoutY="102.0" size="70.0" />
+                  <Label layoutX="45.0" layoutY="113.0" style="-fx-background-color: white;" text="QUẢN LÝ TÀI KHOẢN" textAlignment="CENTER" textFill="#076eed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

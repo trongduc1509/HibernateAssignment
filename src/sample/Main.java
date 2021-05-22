@@ -11,8 +11,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Login loginPage = new Login();
-        loginPage.start(primaryStage);
+        Parent root = FXMLLoader.load(getClass().getResource("PortalLogin.fxml"));
+        Image icon = new Image("OIP.png");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setTitle("HCMUS Portal");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
         primaryStage.setResizable(Boolean.FALSE);
     }
 

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernate.POJO.Session" table="session" schema="courseregistration">
+        <id name="id">
+            <column name="id" sql-type="int"/>
+        </id>
+        <property name="start">
+            <column name="start" sql-type="time" not-null="true"/>
+        </property>
+        <property name="end">
+            <column name="end" sql-type="time" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

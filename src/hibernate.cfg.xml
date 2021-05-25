@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/courseregistration</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">khtn150901</property>
+
+        <mapping class = "hibernate.POJO.Clazz"/>
+        <mapping resource="Clazz.hbm.xml"/>
+        <mapping class = "hibernate.POJO.ClazzInfo"/>
+        <mapping resource="ClazzInfo.hbm.xml"/>
+        <mapping class = "hibernate.POJO.Course"/>
+        <mapping resource="Course.hbm.xml"/>
+        <mapping class = "hibernate.POJO.Crs"/>
+        <mapping resource="Crs.hbm.xml"/>
+        <mapping class = "hibernate.POJO.Person"/>
+        <mapping resource="Person.hbm.xml"/>
+        <mapping class = "hibernate.POJO.RegistSubject"/>
+        <mapping resource="RegistSubject.hbm.xml"/>
+        <mapping class = "hibernate.POJO.Role"/>
+        <mapping resource="Role.hbm.xml"/>
+        <mapping class = "hibernate.POJO.Semester"/>
+        <mapping resource="Semester.hbm.xml"/>
+        <mapping class="hibernate.POJO.Session"/>
+        <mapping resource="Session.hbm.xml"/>
+        <mapping class="hibernate.POJO.Subject"/>
+        <mapping resource="Subject.hbm.xml"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

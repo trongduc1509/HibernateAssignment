@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernate.POJO.Crs" table="crs" schema="courseregistration">
+        <id name="id">
+            <column name="id" sql-type="int"/>
+        </id>
+        <property name="start">
+            <column name="start" sql-type="date" not-null="true"/>
+        </property>
+        <property name="end">
+            <column name="end" sql-type="date" not-null="true"/>
+        </property>
+        <property name="semester_id">
+            <column name="semester_id" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

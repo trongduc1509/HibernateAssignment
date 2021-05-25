@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernate.POJO.Clazz" table="clazz" schema="courseregistration">
+        <id name="id">
+            <column name="id" sql-type="char(10)" length="10"/>
+        </id>
+        <property name="total">
+            <column name="total" sql-type="int" not-null="true"/>
+        </property>
+        <property name="male">
+            <column name="male" sql-type="int" not-null="true"/>
+        </property>
+        <property name="female">
+            <column name="female" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

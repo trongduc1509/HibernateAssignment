@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="hibernate.cfg.xml" value="19244119-dfc4-4ef4-9ffb-8441aaa62b89" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -26,5 +37,8 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="de.jensd:fontawesomefx-commons:9.1.2" level="project" />
     <orderEntry type="library" name="de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2" level="project" />
+    <orderEntry type="library" name="org.hibernate:hibernate-core:5.4.31.Final" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.25" level="project" />
+    <orderEntry type="library" name="Hibernate 5.4.11-5.4.11" level="project" />
   </component>
 </module>

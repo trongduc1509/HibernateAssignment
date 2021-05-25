@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernate.POJO.Course" table="course" schema="courseregistration">
+        <id name="courseId">
+            <column name="course_id" sql-type="int"/>
+        </id>
+        <property name="subjectId">
+            <column name="subject_id" sql-type="char(10)" length="10" not-null="true"/>
+        </property>
+        <property name="teacher">
+            <column name="teacher" sql-type="char(8)" length="8" not-null="true"/>
+        </property>
+        <property name="room">
+            <column name="room" sql-type="char(10)" length="10" not-null="true"/>
+        </property>
+        <property name="day">
+            <column name="day" sql-type="varchar(8)" length="8" not-null="true"/>
+        </property>
+        <property name="sessionId">
+            <column name="session_id" sql-type="int" not-null="true"/>
+        </property>
+        <property name="maxSlot">
+            <column name="maxSlot" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

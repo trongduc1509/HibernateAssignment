@@ -7,7 +7,7 @@ public class Crs {
     private int id;
     private Date start;
     private Date end;
-    private int semester_id;
+    private Integer semesterId;
 
     public int getId() {
         return id;
@@ -33,12 +33,12 @@ public class Crs {
         this.end = end;
     }
 
-    public int getSemester_id() {
-        return semester_id;
+    public Integer getSemesterId() {
+        return semesterId;
     }
 
-    public void setSemester_id(int semester_id) {
-        this.semester_id = semester_id;
+    public void setSemesterId(Integer semesterId) {
+        this.semesterId = semesterId;
     }
 
     @Override

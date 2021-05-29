@@ -1,23 +1,36 @@
 package sample;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import hibernate.POJO.Person;
+import hibernate.POJO.Semester;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class TeacherScreenController {
+import javafx.scene.control.Label;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class TeacherScreenController implements Initializable {
 
     @FXML
     private FontAwesomeIconView signOut;
 
     @FXML
     private FontAwesomeIconView curAccount;
+
+    @FXML
+    private Label curUser;
 
     @FXML
     private AnchorPane courseList;
@@ -39,11 +52,36 @@ public class TeacherScreenController {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
+
+    private Person curAcc;
+    private Semester curSemester;
+
+    public void setCurUser(Person temp, Semester sem) {
+        curAcc = temp;
+        curUser.setText(curAcc.getName());
+        if (sem != null)
+            curSemester = sem;
+    }
 
     @FXML
-    void checkAccount(MouseEvent event) {
-
+    void checkAccount(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserAccount.fxml"));
+        loader.load();
+        UserAccountController uAC = loader.getController();
+        uAC.setUserAcc(curAcc);
+        stage = new Stage();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(curAccount.getScene().getWindow());
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        stage.showAndWait();
     }
 
     @FXML
@@ -58,15 +96,18 @@ public class TeacherScreenController {
 
     @FXML
     void logOut(MouseEvent event) throws Exception {
-        root = FXMLLoader.load(getClass().getResource("PortalLogin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PortalLogin.fxml"));
+        loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);
         stage.setTitle("HCMUS Portal");
-        scene = new Scene(root);
+        scene = new Scene(loader.getRoot());
         stage.setScene(scene);
         stage.setResizable(Boolean.FALSE);
-        stage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     @FXML
@@ -85,9 +126,26 @@ public class TeacherScreenController {
     }
 
     @FXML
-    void teacherManagement(MouseEvent event) {
-
+    void teacherManagement(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TeacherAccounts.fxml"));
+        loader.load();
+        TeacherAccountsController tAC = loader.getController();
+        tAC.setCurUser(curAcc);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
 

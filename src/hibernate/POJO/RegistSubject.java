@@ -5,7 +5,7 @@ import java.util.Objects;
 public class RegistSubject {
     private int id;
     private String student;
-    private int courseId;
+    private Integer courseId;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class RegistSubject {
         this.student = student;
     }
 
-    public int getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
     }
 

@@ -8,7 +8,7 @@ public class Course {
     private String teacher;
     private String room;
     private String day;
-    private int sessionId;
+    private Integer sessionId;
     private Integer maxSlot;
 
     public int getCourseId() {
@@ -51,11 +51,11 @@ public class Course {
         this.day = day;
     }
 
-    public int getSessionId() {
+    public Integer getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(int sessionId) {
+    public void setSessionId(Integer sessionId) {
         this.sessionId = sessionId;
     }
 

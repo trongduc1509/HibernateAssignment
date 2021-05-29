@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class ClazzInfo {
     private int classInfoId;
-    private String class_id;
-    private String student_id;
+    private String classId;
+    private String studentId;
 
     public int getClassInfoId() {
         return classInfoId;
@@ -15,20 +15,20 @@ public class ClazzInfo {
         this.classInfoId = classInfoId;
     }
 
-    public String getClass_id() {
-        return class_id;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setClass_id(String class_id) {
-        this.class_id = class_id;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     @Override

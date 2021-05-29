@@ -73,11 +73,11 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(id, person.id) && Objects.equals(name, person.name) && Objects.equals(birthday, person.birthday) && Objects.equals(gender, person.gender) && Objects.equals(username, person.username) && Objects.equals(password, person.password);
+        return Objects.equals(id, person.id) && Objects.equals(name, person.name) && Objects.equals(birthday, person.birthday) && Objects.equals(gender, person.gender) && Objects.equals(role, person.role) && Objects.equals(username, person.username) && Objects.equals(password, person.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, birthday, gender, username, password);
+        return Objects.hash(id, name, birthday, gender, role, username, password);
     }
 }

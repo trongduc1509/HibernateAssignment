@@ -46,9 +46,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="loginButton1" focusTraversable="false" layoutX="198.0" layoutY="207.0" mnemonicParsing="false" onAction="#loginRequest" prefHeight="30.0" prefWidth="104.0" text="Đăng Nhập">
+                  <Button fx:id="loginButton1" focusTraversable="false" layoutX="198.0" layoutY="207.0" mnemonicParsing="false" onAction="#loginRequest" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: #189AB4;" text="Đăng Nhập" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                   <PasswordField fx:id="userInputP1" layoutX="163.0" layoutY="152.0" promptText="password">

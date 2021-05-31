@@ -1,6 +1,7 @@
 package sample;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import hibernate.DAO.PersonDAO;
 import hibernate.POJO.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +70,8 @@ public class StudentScreenController implements Initializable {
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
         stage.showAndWait();
+        String id = curUserAcc.getId();
+        setCurUserAcc(PersonDAO.searchSingleStudentById(id));
     }
 
     @FXML

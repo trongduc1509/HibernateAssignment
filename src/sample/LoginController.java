@@ -63,7 +63,8 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TeacherScreen.fxml"));
         loader.load();
         TeacherScreenController tSC = loader.getController();
-        tSC.setCurUser(curAcc, null);
+        tSC.setCurUser(curAcc);
+        tSC.setCurSemester(null);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);

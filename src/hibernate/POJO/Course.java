@@ -9,6 +9,7 @@ public class Course {
     private String room;
     private String day;
     private Integer sessionId;
+    private Integer crsId;
     private Integer maxSlot;
 
     public int getCourseId() {
@@ -59,6 +60,14 @@ public class Course {
         this.sessionId = sessionId;
     }
 
+    public Integer getCrsId() {
+        return crsId;
+    }
+
+    public void setCrsId(Integer crsId) {
+        this.crsId = crsId;
+    }
+
     public Integer getMaxSlot() {
         return maxSlot;
     }
@@ -72,7 +81,7 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return courseId == course.courseId && Objects.equals(room, course.room) && Objects.equals(day, course.day) && Objects.equals(maxSlot, course.maxSlot);
+        return courseId == course.courseId;
     }
 
     @Override

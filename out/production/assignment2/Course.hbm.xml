@@ -23,6 +23,9 @@
         <property name="sessionId">
             <column name="session_id" sql-type="int" not-null="true"/>
         </property>
+        <property name="crsId">
+            <column name="crs_id" sql-type="int" not-null="true"/>
+        </property>
         <property name="maxSlot">
             <column name="maxSlot" sql-type="int" not-null="true"/>
         </property>

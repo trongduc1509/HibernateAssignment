@@ -25,6 +25,7 @@ public class PersonInfo {
         this.password = password;
     }
 
+
     public PersonInfo(Person a) {
         this.id = a.getId();
         this.name = a.getName();

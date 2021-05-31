@@ -58,4 +58,88 @@ public class PersonDAO {
         }
         return studentList;
     }
+
+    public static void add(Person user) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+    }
+
+    public static void delete(Person user) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+    }
+
+    public static void update(Person user) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+    }
+
+    public static List<Person> searchTeacherById(String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedTeacher = null;
+        try {
+            final String hql = "from Person where role='GV' and id LIKE '%" + idFind + "%'";
+            Query query = session.createQuery(hql);
+            listFindedTeacher = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return listFindedTeacher;
+    }
+
+    public static Person searchSingleTeacherById(String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedTch = null;
+        try {
+            final String hql = "from Person where role='GV' and id = '" + idFind + "'";
+            Query query = session.createQuery(hql);
+            listFindedTch = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return (listFindedTch.isEmpty()) ? null : listFindedTch.get(0);
+    }
+
+    public static Person searchSingleStudentById(String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedStu = null;
+        try {
+            final String hql = "from Person where role='SV' and id = '" + idFind + "'";
+            Query query = session.createQuery(hql);
+            listFindedStu = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return (listFindedStu.isEmpty()) ? null : listFindedStu.get(0);
+    }
 }

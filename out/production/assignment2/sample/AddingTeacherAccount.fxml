@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserAccountEditController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddingTeacherAccountController">
     <top>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="600.0" style="-fx-background-color: #D4F1F4;" BorderPane.alignment="CENTER">
             <children>
@@ -28,7 +28,7 @@
     <center>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" layoutX="100.0" layoutY="14.0" prefHeight="37.0" prefWidth="407.0" text="THAY ĐỔI THÔNG TIN TÀI KHOẢN" textFill="#003060">
+                <Label alignment="CENTER" layoutX="84.0" layoutY="14.0" prefHeight="37.0" prefWidth="438.0" text="THÔNG TIN TÀI KHOẢN MUỐN THÊM" textFill="#003060">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
@@ -42,7 +42,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="idP" editable="false" focusTraversable="false" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="336.0" />
+                                <TextField fx:id="idP" focusTraversable="false" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="336.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
@@ -62,7 +62,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                        <DatePicker fx:id="dobP" focusTraversable="false" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="200.0" />
+                        <DatePicker fx:id="dobP" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="196.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
@@ -72,7 +72,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                        <RadioButton fx:id="male" layoutX="146.0" layoutY="20.0" mnemonicParsing="false" text="Nam" textFill="#003060">
+                        <RadioButton fx:id="male" layoutX="146.0" layoutY="16.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="87.0" text="Nam" textFill="#003060">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -80,7 +80,7 @@
                               <ToggleGroup fx:id="gender" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="female" layoutX="250.0" layoutY="20.0" mnemonicParsing="false" text="Nữ" textFill="#003060" toggleGroup="$gender">
+                        <RadioButton fx:id="female" layoutX="254.0" layoutY="17.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="87.0" text="Nữ" textFill="#003060" toggleGroup="$gender">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -104,19 +104,24 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="userPP" focusTraversable="false" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="336.0" />
+                                <TextField fx:id="userPP" editable="false" focusTraversable="false" layoutX="146.0" layoutY="14.0" prefHeight="33.0" prefWidth="336.0" />
                             </children>
                         </AnchorPane>
                     </children>
                 </VBox>
-                <Button layoutX="221.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#submit" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: #003060;" text="XÁC NHẬN THAY ĐỔI" textFill="WHITE">
+                <Button layoutX="221.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#addTeacherAccount" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: #003060;" text="THÊM TÀI KHOẢN" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Button>
-            <Label fx:id="status" layoutX="14.0" layoutY="504.0" prefHeight="32.0" prefWidth="323.0" textFill="RED">
+            <Label layoutX="14.0" layoutY="412.0" prefHeight="33.0" prefWidth="391.0" text="*Tên tài khoản và mật khẩu sẽ được khởi tạo mặc định theo ID!" textFill="RED" wrapText="true">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="status" layoutX="14.0" layoutY="503.0" prefHeight="33.0" prefWidth="391.0" textFill="RED" wrapText="true">
+               <font>
+                  <Font size="14.0" />
                </font>
             </Label>
             </children>

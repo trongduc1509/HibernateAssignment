@@ -94,7 +94,7 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <Button layoutX="221.0" layoutY="441.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: #003060;" text="THAY ĐỔI THÔNG TIN" textFill="WHITE">
+            <Button layoutX="221.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#editUserAccount" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: #003060;" text="THAY ĐỔI THÔNG TIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

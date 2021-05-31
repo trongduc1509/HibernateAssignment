@@ -1,6 +1,7 @@
 package sample;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import hibernate.DAO.PersonDAO;
 import hibernate.POJO.Person;
 import hibernate.POJO.Semester;
 import javafx.fxml.FXML;
@@ -56,11 +57,13 @@ public class TeacherScreenController implements Initializable {
     private Person curAcc;
     private Semester curSemester;
 
-    public void setCurUser(Person temp, Semester sem) {
+    public void setCurUser(Person temp) {
         curAcc = temp;
         curUser.setText(curAcc.getName());
-        if (sem != null)
-            curSemester = sem;
+    }
+
+    public void setCurSemester(Semester temp) {
+        curSemester = temp;
     }
 
     @FXML
@@ -75,13 +78,15 @@ public class TeacherScreenController implements Initializable {
         stage.setTitle("HCMUS Portal");
         scene = new Scene(loader.getRoot());
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(curAccount.getScene().getWindow());
-        stage.setResizable(Boolean.FALSE);
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(curAccount.getScene().getWindow());
+        stage.setResizable(Boolean.FALSE);
         stage.showAndWait();
+        String id = curAcc.getId();
+        setCurUser(PersonDAO.searchSingleTeacherById(id));
     }
 
     @FXML

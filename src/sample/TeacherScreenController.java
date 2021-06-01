@@ -101,18 +101,8 @@ public class TeacherScreenController implements Initializable {
 
     @FXML
     void logOut(MouseEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PortalLogin.fxml"));
-        loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Image icon = new Image("OIP.png");
-        stage.getIcons().add(icon);
-        stage.setTitle("HCMUS Portal");
-        scene = new Scene(loader.getRoot());
-        stage.setScene(scene);
-        stage.setResizable(Boolean.FALSE);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        LoginController lC = new LoginController();
+        lC.loadLogOut(event, stage, scene);
     }
 
     @FXML
@@ -126,8 +116,21 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void subjectManagement(MouseEvent event) {
-
+    void subjectManagement(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SubjectManagement.fxml"));
+        loader.load();
+        SubjectManagementController sMC = loader.getController();
+        sMC.setCurUser(curAcc);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     @FXML
@@ -151,6 +154,23 @@ public class TeacherScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void loadTeacherScreen(MouseEvent event, Stage stage, Scene scene, Person curAcc) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TeacherScreen.fxml"));
+        loader.load();
+        TeacherScreenController tSC = loader.getController();
+        tSC.setCurUser(curAcc);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 }
 

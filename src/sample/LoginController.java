@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -100,5 +101,20 @@ public class LoginController {
                 return item;
         }
         return null;
+    }
+
+    public void loadLogOut(MouseEvent event, Stage stage, Scene scene) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PortalLogin.fxml"));
+        loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 }

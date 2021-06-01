@@ -86,18 +86,8 @@ public class StudentScreenController implements Initializable {
 
     @FXML
     void logOut(MouseEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PortalLogin.fxml"));
-        loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Image icon = new Image("OIP.png");
-        stage.getIcons().add(icon);
-        stage.setTitle("HCMUS Portal");
-        scene = new Scene(loader.getRoot());
-        stage.setScene(scene);
-        stage.setResizable(Boolean.FALSE);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        LoginController lC = new LoginController();
+        lC.loadLogOut(event, stage, scene);
     }
 
     @FXML

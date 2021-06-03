@@ -34,6 +34,9 @@ public class TeacherScreenController implements Initializable {
     private Label curUser;
 
     @FXML
+    private Label curSemester;
+
+    @FXML
     private AnchorPane courseList;
 
     @FXML
@@ -55,7 +58,7 @@ public class TeacherScreenController implements Initializable {
     private Scene scene;
 
     private Person curAcc;
-    private Semester curSemester;
+    private Semester curSem;
 
     public void setCurUser(Person temp) {
         curAcc = temp;
@@ -63,7 +66,9 @@ public class TeacherScreenController implements Initializable {
     }
 
     public void setCurSemester(Semester temp) {
-        curSemester = temp;
+        curSem = temp;
+        if (temp != null)
+            curSemester.setText("Học kì hiện tại: " + curSem.getName() + " - " + curSem.getYear());
     }
 
     @FXML
@@ -106,8 +111,22 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void semesterManagement(MouseEvent event) {
-
+    void semesterManagement(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SemesterManagement.fxml"));
+        loader.load();
+        SemesterManagementController sMC = loader.getController();
+        sMC.setCurUser(curAcc);
+        sMC.setCurSemester(curSem);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     @FXML
@@ -121,6 +140,7 @@ public class TeacherScreenController implements Initializable {
         loader.load();
         SubjectManagementController sMC = loader.getController();
         sMC.setCurUser(curAcc);
+        sMC.setCurSemester(curSem);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);
@@ -139,6 +159,7 @@ public class TeacherScreenController implements Initializable {
         loader.load();
         TeacherAccountsController tAC = loader.getController();
         tAC.setCurUser(curAcc);
+        tAC.setCurSemester(curSem);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);
@@ -156,11 +177,12 @@ public class TeacherScreenController implements Initializable {
 
     }
 
-    public void loadTeacherScreen(MouseEvent event, Stage stage, Scene scene, Person curAcc) throws Exception {
+    public void loadTeacherScreen(MouseEvent event, Stage stage, Scene scene, Person curAcc, Semester curSeme) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TeacherScreen.fxml"));
         loader.load();
         TeacherScreenController tSC = loader.getController();
         tSC.setCurUser(curAcc);
+        tSC.setCurSemester(curSeme);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);

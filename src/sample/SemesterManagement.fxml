@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SubjectManagementController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SemesterManagementController">
     <top>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #D4F1F4;" BorderPane.alignment="CENTER">
             <children>
@@ -30,7 +30,7 @@
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font></Label>
-            <Label fx:id="curSemester" alignment="CENTER_RIGHT" layoutX="706.0" layoutY="99.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed" wrapText="true">
+            <Label fx:id="curSemester" alignment="CENTER_RIGHT" layoutX="706.0" layoutY="99.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -41,25 +41,25 @@
     <right>
         <VBox prefHeight="450.0" prefWidth="158.0" style="-fx-background-color: #D4F1F4;" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onMouseClicked="#addSubject" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="THÊM" textFill="WHITE">
+                <Button mnemonicParsing="false" onMouseClicked="#addSemester" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="THÊM" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="13.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#delSubject" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="XÓA" textFill="WHITE">
+                <Button mnemonicParsing="false" onMouseClicked="#delSemester" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="XÓA" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="13.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#editSubject" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="CHỈNH SỬA" textFill="WHITE">
+                <Button mnemonicParsing="false" onMouseClicked="#setCurSemForFunc" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="SET HỌC KÌ HIỆN TẠI" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="13.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -67,14 +67,14 @@
                 </Button>
                 <AnchorPane prefHeight="137.0" prefWidth="158.0" style="-fx-background-color: #D9E4EC;">
                     <children>
-                        <Label layoutX="5.0" layoutY="14.0" prefHeight="29.0" prefWidth="130.0" text="Mã môn học cần tìm:" textFill="#003060">
+                        <Label layoutX="5.0" layoutY="14.0" prefHeight="29.0" prefWidth="130.0" text="Năm học cần tìm:" textFill="#003060">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
                         <TextField fx:id="find" layoutX="5.0" layoutY="43.0" prefHeight="25.0" prefWidth="149.0" />
-                        <Button layoutX="89.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#findSubject" style="-fx-background-color: #189AB4;" text="Tìm kiếm" textFill="WHITE" />
-                        <Button layoutX="5.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#updateSubjectListByTable" style="-fx-background-color: #189AB4;" text="Refresh" textFill="WHITE" />
+                        <Button layoutX="89.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#findYear" style="-fx-background-color: #189AB4;" text="Tìm kiếm" textFill="WHITE" />
+                        <Button layoutX="5.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#updateSemesterListByTable" style="-fx-background-color: #189AB4;" text="Refresh" textFill="WHITE" />
                     </children>
                 </AnchorPane>
             </children>
@@ -85,9 +85,10 @@
             <content>
                 <TableView fx:id="table" prefHeight="551.0" prefWidth="742.0">
                     <columns>
-                        <TableColumn fx:id="idColumn" editable="false" prefWidth="155.0" resizable="false" text="Mã Môn Học" />
-                        <TableColumn fx:id="nameColumn" editable="false" minWidth="6.0" prefWidth="411.0" resizable="false" text="Tên Môn Học" />
-                        <TableColumn fx:id="creditsColumn" editable="false" prefWidth="161.0" resizable="false" text="Số Tín Chỉ" />
+                        <TableColumn fx:id="nameColumn" editable="false" prefWidth="123.0" resizable="false" text="Tên học kì" />
+                        <TableColumn fx:id="yearColumn" editable="false" minWidth="6.0" prefWidth="159.0" resizable="false" text="Năm học" />
+                        <TableColumn fx:id="startColumn" editable="false" minWidth="0.0" prefWidth="222.0" resizable="false" text="Ngày bắt đầu" />
+                  <TableColumn fx:id="endColumn" editable="false" prefWidth="222.0" resizable="false" text="Ngày kết thúc" />
                     </columns>
                 </TableView>
             </content>

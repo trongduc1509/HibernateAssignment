@@ -3,6 +3,7 @@ package sample;
 import hibernate.DAO.PersonDAO;
 import hibernate.POJO.Person;
 import hibernate.POJO.PersonInfo;
+import hibernate.POJO.Semester;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -29,11 +30,15 @@ import java.util.ResourceBundle;
 
 public class TeacherAccountsController implements Initializable {
     private Person curAcc;
+    private Semester curSem;
     private Stage stage;
     private Scene scene;
 
     @FXML
     private Label curUser;
+
+    @FXML
+    private Label curSemester;
 
     @FXML
     private TextField find;
@@ -65,6 +70,12 @@ public class TeacherAccountsController implements Initializable {
     public void setCurUser(Person cur) {
         curAcc = cur;
         curUser.setText(curAcc.getName());
+    }
+
+    public void setCurSemester(Semester temp) {
+        curSem = temp;
+        if (temp != null)
+            curSemester.setText("Học kì hiện tại: " + curSem.getName() + " - " + curSem.getYear());
     }
 
     @Override
@@ -176,7 +187,7 @@ public class TeacherAccountsController implements Initializable {
     @FXML
     void getBack(MouseEvent event) throws Exception {
         TeacherScreenController tSC = new TeacherScreenController();
-        tSC.loadTeacherScreen(event, stage, scene, curAcc);
+        tSC.loadTeacherScreen(event, stage, scene, curAcc, curSem);
     }
 
     @FXML

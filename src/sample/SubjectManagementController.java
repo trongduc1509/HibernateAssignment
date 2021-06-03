@@ -1,10 +1,9 @@
 package sample;
 
-import hibernate.DAO.PersonDAO;
 import hibernate.DAO.SubjectDAO;
 import hibernate.POJO.Person;
+import hibernate.POJO.Semester;
 import hibernate.POJO.Subject;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,11 +20,15 @@ import java.util.ResourceBundle;
 
 public class SubjectManagementController implements Initializable {
     private Person curAcc;
+    private Semester curSem;
     private Stage stage;
     private Scene scene;
 
     @FXML
     private Label curUser;
+
+    @FXML
+    private Label curSemester;
 
     @FXML
     private TextField find;
@@ -50,6 +53,12 @@ public class SubjectManagementController implements Initializable {
         curUser.setText(curAcc.getName());
     }
 
+    public void setCurSemester(Semester temp) {
+        curSem = temp;
+        if (temp != null)
+            curSemester.setText("Học kì hiện tại: " + curSem.getName() + " - " + curSem.getYear());
+    }
+
     @FXML
     void addSubject(MouseEvent event) throws Exception {
         SubjectInfoController sIC = new SubjectInfoController();
@@ -65,8 +74,7 @@ public class SubjectManagementController implements Initializable {
             alert.setHeaderText("!!!Xóa môn học!!!");
             alert.setContentText("Bạn có chắc chắn muốn xóa môn học " + ob.getId() + " - " + ob.getName() + "?");
             if (alert.showAndWait().get() == ButtonType.OK) {
-                Subject item = SubjectDAO.getDeteminedSubject(ob.getId());
-                SubjectDAO.delete(item);
+                SubjectDAO.delete(ob);
                 updateSubjectListByTable();
             }
         }
@@ -87,13 +95,7 @@ public class SubjectManagementController implements Initializable {
         if (!find.getText().isEmpty()) {
             subjectList.clear();
             funcList = SubjectDAO.searchSubjectById(find.getText());
-            for (Subject item : funcList) {
-                Subject temp = new Subject();
-                temp.setId(item.getId());
-                temp.setName(item.getName());
-                temp.setCredits(item.getCredits());
-                subjectList.add(temp);
-            }
+            subjectList.addAll(funcList);
 
             idColumn.setCellValueFactory(new PropertyValueFactory<Subject, String>("id"));
             nameColumn.setCellValueFactory(new PropertyValueFactory<Subject, String>("name"));
@@ -106,7 +108,7 @@ public class SubjectManagementController implements Initializable {
     @FXML
     void getBack(MouseEvent event) throws Exception {
         TeacherScreenController tSC = new TeacherScreenController();
-        tSC.loadTeacherScreen(event, stage, scene, curAcc);
+        tSC.loadTeacherScreen(event, stage, scene, curAcc, curSem);
     }
 
     @FXML
@@ -119,13 +121,7 @@ public class SubjectManagementController implements Initializable {
     void updateSubjectListByTable() {
         subjectList.clear();
         funcList = SubjectDAO.getAllSubject();
-        for (Subject item : funcList) {
-            Subject temp = new Subject();
-            temp.setId(item.getId());
-            temp.setName(item.getName());
-            temp.setCredits(item.getCredits());
-            subjectList.add(temp);
-        }
+        subjectList.addAll(funcList);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<Subject, String>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Subject, String>("name"));

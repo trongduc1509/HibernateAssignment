@@ -93,17 +93,17 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="studentList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#studentManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="studentList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#courseRegistManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <opaqueInsets>
                   <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
                </opaqueInsets>
                <children>
-                  <FontAwesomeIconView fill="#076eed" glyphName="USER" layoutX="110.0" layoutY="102.0" size="70.0" />
-                  <Label layoutX="65.0" layoutY="113.0" style="-fx-background-color: white;" text="QL SV / LỚP HỌC" textAlignment="CENTER" textFill="#076eed">
+                  <Label layoutX="51.0" layoutY="112.0" style="-fx-background-color: white;" text="ĐĂNG KÍ HỌC PHẦN" textAlignment="CENTER" textFill="#076eed">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <FontAwesomeIconView fill="#076eed" glyphName="BOOK" layoutX="106.0" layoutY="101.0" size="70.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="classList" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#classManagement" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="1">

@@ -95,8 +95,22 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void classManagement(MouseEvent event) {
-
+    void classManagement(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassManagement.fxml"));
+        loader.load();
+        ClassManagementController cMC = loader.getController();
+        cMC.setCurUser(curAcc);
+        cMC.setCurSemester(curSem);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     @FXML
@@ -130,7 +144,7 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void studentManagement(MouseEvent event) {
+    void courseRegistManagement(MouseEvent event) {
 
     }
 

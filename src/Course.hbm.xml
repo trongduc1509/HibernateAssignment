@@ -12,7 +12,7 @@
             <column name="subject_id" sql-type="char(10)" length="10" not-null="true"/>
         </property>
         <property name="teacher">
-            <column name="teacher" sql-type="char(8)" length="8" not-null="true"/>
+            <column name="teacher" sql-type="varchar(30)" length="30" not-null="true"/>
         </property>
         <property name="room">
             <column name="room" sql-type="char(10)" length="10" not-null="true"/>

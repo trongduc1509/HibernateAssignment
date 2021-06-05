@@ -142,4 +142,39 @@ public class PersonDAO {
         }
         return (listFindedStu.isEmpty()) ? null : listFindedStu.get(0);
     }
+
+    public static List<Person> getAllStuInClass(String idClazz) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedStu = null;
+        try {
+            final String hql = "select p from Person p, ClazzInfo ci where p.role='SV' " +
+                    "and ci.classId = '" + idClazz +
+                    "' and p.id = ci.studentId";
+            Query query = session.createQuery(hql);
+            listFindedStu = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return listFindedStu;
+    }
+
+    public static List<Person> searchStuInClass(String idClazz, String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedStu = null;
+        try {
+            final String hql = "select p from Person p, ClazzInfo ci where p.role='SV' " +
+                    "and ci.classId = '" + idClazz +
+                    "' and p.id = ci.studentId" +
+                    " and ci.studentId like '%" + idFind + "%'";
+            Query query = session.createQuery(hql);
+            listFindedStu = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return listFindedStu;
+    }
 }

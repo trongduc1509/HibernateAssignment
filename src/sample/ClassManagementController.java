@@ -1,12 +1,9 @@
 package sample;
 
 import hibernate.DAO.ClazzDAO;
-import hibernate.DAO.SemesterDAO;
-import hibernate.DAO.SubjectDAO;
 import hibernate.POJO.Clazz;
 import hibernate.POJO.Person;
 import hibernate.POJO.Semester;
-import hibernate.POJO.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,7 +21,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 

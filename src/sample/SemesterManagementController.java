@@ -1,6 +1,8 @@
 package sample;
 
+import hibernate.DAO.CrsDAO;
 import hibernate.DAO.SemesterDAO;
+import hibernate.POJO.Crs;
 import hibernate.POJO.Person;
 import hibernate.POJO.Semester;
 import javafx.collections.FXCollections;
@@ -93,13 +95,22 @@ public class SemesterManagementController implements Initializable {
     void delSemester(MouseEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Semester ob = table.getSelectionModel().getSelectedItem();
+            List<Crs> checkList = CrsDAO.getAllCrsBySemester(ob.getId());
             if (curSem == null) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("!!!Xóa học kì!!!");
-                alert.setContentText("Bạn có chắc chắn muốn xóa học kì [" + ob.getName() + " - " + ob.getYear() + "]?");
-                if (alert.showAndWait().get() == ButtonType.OK) {
-                    SemesterDAO.delete(ob);
-                    updateSemesterListByTable();
+                if (checkList.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setHeaderText("!!!Xóa học kì!!!");
+                    alert.setContentText("Bạn có chắc chắn muốn xóa học kì [" + ob.getName() + " - " + ob.getYear() + "]?");
+                    if (alert.showAndWait().get() == ButtonType.OK) {
+                        SemesterDAO.delete(ob);
+                        updateSemesterListByTable();
+                    }
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("!!!Lỗi xóa học kì!!!");
+                    alert.setContentText("Tồn tại kì đăng kí học phần thuộc học kì này!!!");
+                    alert.showAndWait();
                 }
             }
             else {
@@ -110,12 +121,20 @@ public class SemesterManagementController implements Initializable {
                     alert.showAndWait();
                 }
                 else {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setHeaderText("!!!Xóa học kì!!!");
-                    alert.setContentText("Bạn có chắc chắn muốn xóa học kì [" + ob.getName() + " - " + ob.getYear() + "]?");
-                    if (alert.showAndWait().get() == ButtonType.OK) {
-                        SemesterDAO.delete(ob);
-                        updateSemesterListByTable();
+                    if (checkList.isEmpty()) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setHeaderText("!!!Xóa học kì!!!");
+                        alert.setContentText("Bạn có chắc chắn muốn xóa học kì [" + ob.getName() + " - " + ob.getYear() + "]?");
+                        if (alert.showAndWait().get() == ButtonType.OK) {
+                            SemesterDAO.delete(ob);
+                            updateSemesterListByTable();
+                        }
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("!!!Lỗi xóa học kì!!!");
+                        alert.setContentText("Tồn tại kì đăng kí học phần thuộc học kì này!!!");
+                        alert.showAndWait();
                     }
                 }
             }

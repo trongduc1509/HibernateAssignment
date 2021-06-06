@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -115,7 +116,15 @@ public class TeacherScreenController implements Initializable {
 
     @FXML
     void courseManagement(MouseEvent event) {
+        if (curSem == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("!!!THIẾU THÔNG TIN ĐỂ THỰC HIỆN CHỨC NĂNG!!!");
+            alert.setContentText("Vui lòng thiết lập học kì hiện tại để thực hiện chức năng này!!!");
+            alert.showAndWait();
+        }
+        else {
 
+        }
     }
 
     @FXML
@@ -144,8 +153,30 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void courseRegistManagement(MouseEvent event) {
-
+    void courseRegistManagement(MouseEvent event) throws Exception {
+        if (curSem == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("!!!THIẾU THÔNG TIN ĐỂ THỰC HIỆN CHỨC NĂNG!!!");
+            alert.setContentText("Vui lòng thiết lập học kì hiện tại để thực hiện chức năng này!!!");
+            alert.showAndWait();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseRegistrationPeriod.fxml"));
+            loader.load();
+            CourseRegistrationPeriodController cRPC = loader.getController();
+            cRPC.setCurUser(curAcc);
+            cRPC.setCurSemester(curSem);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Image icon = new Image("OIP.png");
+            stage.getIcons().add(icon);
+            stage.setTitle("HCMUS Portal");
+            scene = new Scene(loader.getRoot());
+            stage.setScene(scene);
+            stage.setResizable(Boolean.FALSE);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        }
     }
 
     @FXML

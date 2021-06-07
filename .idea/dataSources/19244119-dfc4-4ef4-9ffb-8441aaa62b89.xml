@@ -1105,7 +1105,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>6</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="315" parent="288" name="crs_id">
+    <column id="315" parent="288" name="semester_id">
       <Position>7</Position>
       <DataType>int|0s</DataType>
     </column>
@@ -1121,8 +1121,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>session_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="319" parent="288" name="FK_COURSE_CRS">
-      <ColNames>crs_id</ColNames>
+    <index id="319" parent="288" name="FK_COURSE_SEMESTER">
+      <ColNames>semester_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="320" parent="288" name="PRIMARY">
@@ -1140,9 +1140,9 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <RefTableName>session</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="323" parent="288" name="FK_COURSE_CRS">
-      <ColNames>crs_id</ColNames>
-      <RefTableName>crs</RefTableName>
+    <foreign-key id="323" parent="288" name="FK_COURSE_SEMESTER">
+      <ColNames>semester_id</ColNames>
+      <RefTableName>semester</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <column id="324" parent="289" name="id">

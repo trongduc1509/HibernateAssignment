@@ -35,7 +35,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-            <Label fx:id="curUser1" alignment="CENTER" layoutX="301.0" layoutY="56.0" prefHeight="37.0" prefWidth="298.0" text="KÌ ĐĂNG KÝ HỌC PHẦN" textFill="#076eed">
+            <Label fx:id="curUser1" alignment="CENTER" layoutX="301.0" layoutY="56.0" prefHeight="37.0" prefWidth="298.0" text="QUẢN LÝ CÁC KÌ ĐKHP" textFill="#076eed">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

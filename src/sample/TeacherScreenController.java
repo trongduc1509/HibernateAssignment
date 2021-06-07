@@ -115,7 +115,7 @@ public class TeacherScreenController implements Initializable {
     }
 
     @FXML
-    void courseManagement(MouseEvent event) {
+    void courseManagement(MouseEvent event) throws Exception {
         if (curSem == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("!!!THIẾU THÔNG TIN ĐỂ THỰC HIỆN CHỨC NĂNG!!!");
@@ -123,7 +123,21 @@ public class TeacherScreenController implements Initializable {
             alert.showAndWait();
         }
         else {
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseManagement.fxml"));
+            loader.load();
+            CourseManagementController cMC = loader.getController();
+            cMC.setCurUser(curAcc);
+            cMC.setCurSemester(curSem);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Image icon = new Image("OIP.png");
+            stage.getIcons().add(icon);
+            stage.setTitle("HCMUS Portal");
+            scene = new Scene(loader.getRoot());
+            stage.setScene(scene);
+            stage.setResizable(Boolean.FALSE);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
         }
     }
 

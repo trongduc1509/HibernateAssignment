@@ -9,7 +9,7 @@ public class Course {
     private String room;
     private String day;
     private Integer sessionId;
-    private Integer crsId;
+    private Integer semesterId;
     private Integer maxSlot;
 
     public int getCourseId() {
@@ -60,12 +60,12 @@ public class Course {
         this.sessionId = sessionId;
     }
 
-    public Integer getCrsId() {
-        return crsId;
+    public Integer getSemesterId() {
+        return semesterId;
     }
 
-    public void setCrsId(Integer crsId) {
-        this.crsId = crsId;
+    public void setSemesterId(Integer semesterId) {
+        this.semesterId = semesterId;
     }
 
     public Integer getMaxSlot() {

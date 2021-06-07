@@ -43,4 +43,9 @@ public class Subject {
     public int hashCode() {
         return Objects.hash(id, name, credits);
     }
+
+    @Override
+    public String toString() {
+        return id + " - " + name + " - " + credits + "TC";
+    }
 }

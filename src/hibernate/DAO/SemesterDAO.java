@@ -6,6 +6,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class SemesterDAO {
@@ -79,5 +83,21 @@ public class SemesterDAO {
         } finally {
             session.close();
         }
+    }
+
+    public static void saveCurrentSemester(Semester curSem) throws IOException {
+        FileOutputStream fos = new FileOutputStream(new File("currentSemester.dat"));
+        fos.write(curSem.getId());
+        fos.close();
+    }
+
+    public static int loadCurrentSemester() throws IOException {
+        File f = new File("currentSemester.dat");
+        int res = -1;
+        if (f.exists()) {
+            FileInputStream fis = new FileInputStream(f);
+            res = fis.read();
+        }
+        return res;
     }
 }

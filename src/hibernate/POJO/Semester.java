@@ -62,4 +62,9 @@ public class Semester {
     public int hashCode() {
         return Objects.hash(id, name, year, start, end);
     }
+
+    @Override
+    public String toString() {
+        return getName() + " - " + getYear();
+    }
 }

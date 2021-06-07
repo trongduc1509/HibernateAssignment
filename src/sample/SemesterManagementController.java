@@ -21,6 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -183,14 +184,16 @@ public class SemesterManagementController implements Initializable {
     }
 
     @FXML
-    void setCurSemForFunc(MouseEvent event) {
+    void setCurSemForFunc(MouseEvent event) throws IOException {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Semester sem =table.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("!!!SET HỌC KÌ HIỆN TẠI!!!");
             alert.setContentText("Bạn có chắc chắn muốn set " + sem.getName() + " - " + sem.getYear() + " làm học kì hiện tại??");
-            if (alert.showAndWait().get() == ButtonType.OK)
+            if (alert.showAndWait().get() == ButtonType.OK) {
                 setCurSemester(sem);
+                SemesterDAO.saveCurrentSemester(sem);
+            }
         }
     }
 

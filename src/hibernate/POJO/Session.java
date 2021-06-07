@@ -44,4 +44,9 @@ public class Session {
     public int hashCode() {
         return Objects.hash(id, start, end);
     }
+
+    @Override
+    public String toString() {
+        return getStart() + " - " + getEnd();
+    }
 }

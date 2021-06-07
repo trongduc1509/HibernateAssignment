@@ -35,6 +35,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Label fx:id="curUser1" alignment="CENTER" layoutX="258.0" layoutY="56.0" prefHeight="37.0" prefWidth="385.0" text="QUẢN LÝ TÀI KHOẢN GIÁO VỤ" textFill="#076eed" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </top>

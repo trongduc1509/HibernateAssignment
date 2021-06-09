@@ -1,6 +1,7 @@
 package sample;
 
 import hibernate.DAO.PersonDAO;
+import hibernate.DAO.SemesterDAO;
 import hibernate.POJO.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,11 @@ public class LoginController {
         loader.load();
         TeacherScreenController tSC = loader.getController();
         tSC.setCurUser(curAcc);
-        tSC.setCurSemester(null);
+        int loadSem = SemesterDAO.loadCurrentSemester();
+        if (loadSem == -1)
+            tSC.setCurSemester(null);
+        else
+            tSC.setCurSemester(SemesterDAO.getSemesterById(loadSem));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);
@@ -83,6 +88,11 @@ public class LoginController {
         loader.load();
         StudentScreenController sSC = loader.getController();
         sSC.setCurUserAcc(curAcc);
+        int loadSem = SemesterDAO.loadCurrentSemester();
+        if (loadSem == -1)
+            sSC.setCurSemester(null);
+        else
+            sSC.setCurSemester(SemesterDAO.getSemesterById(loadSem));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Image icon = new Image("OIP.png");
         stage.getIcons().add(icon);

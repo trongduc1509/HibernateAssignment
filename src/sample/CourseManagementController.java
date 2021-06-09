@@ -41,9 +41,6 @@ public class CourseManagementController implements Initializable {
     private Label curSemester;
 
     @FXML
-    private Label curUser1;
-
-    @FXML
     private TextField find;
 
     @FXML
@@ -72,6 +69,9 @@ public class CourseManagementController implements Initializable {
 
     @FXML
     private TableColumn<CourseView, Integer> slotColumn;
+
+    @FXML
+    private TableColumn<CourseView, Integer> currentColumn;
 
 
     public void setCurUser(Person temp) {
@@ -128,13 +128,20 @@ public class CourseManagementController implements Initializable {
     }
 
     @FXML
+    void detail(MouseEvent event) {
+        if (table.getSelectionModel().getSelectedItem() != null) {
+
+        }
+    }
+
+    @FXML
     void findCourse(MouseEvent event) {
         if (!find.getText().isEmpty()) {
             mainList.clear();
             funcList = CourseDAO.getAllCourseBySemesterAndSbj(curSem.getId(), find.getText());
             for (Course item : funcList) {
                 Subject temp = SubjectDAO.getDeteminedSubject(item.getSubjectId());
-                mainList.add(new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot()));
+                mainList.add(new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot(), RegistSubjectDAO.countCurrentSlotInCourse(item.getCourseId())));
             }
 
             idColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("subjectId"));
@@ -145,6 +152,7 @@ public class CourseManagementController implements Initializable {
             dayColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("day"));
             sessionColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("session"));
             slotColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("maxSlot"));
+            currentColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("registedSlot"));
 
             table.setItems(mainList);
         }
@@ -168,7 +176,7 @@ public class CourseManagementController implements Initializable {
         funcList = CourseDAO.getAllCourseBySemester(curSem.getId());
         for (Course item : funcList) {
             Subject temp = SubjectDAO.getDeteminedSubject(item.getSubjectId());
-            mainList.add(new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot()));
+            mainList.add(new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot(), RegistSubjectDAO.countCurrentSlotInCourse(item.getCourseId())));
         }
 
         idColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("subjectId"));
@@ -179,6 +187,7 @@ public class CourseManagementController implements Initializable {
         dayColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("day"));
         sessionColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("session"));
         slotColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("maxSlot"));
+        currentColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("registedSlot"));
 
         table.setItems(mainList);
     }
@@ -193,6 +202,7 @@ public class CourseManagementController implements Initializable {
         dayColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("day"));
         sessionColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("session"));
         slotColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("maxSlot"));
+        currentColumn.setCellValueFactory(new PropertyValueFactory<CourseView, Integer>("registedSlot"));
 
         table.setItems(mainList);
     }

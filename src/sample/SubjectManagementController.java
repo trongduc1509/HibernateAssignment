@@ -1,6 +1,8 @@
 package sample;
 
+import hibernate.DAO.CourseDAO;
 import hibernate.DAO.SubjectDAO;
+import hibernate.POJO.Course;
 import hibernate.POJO.Person;
 import hibernate.POJO.Semester;
 import hibernate.POJO.Subject;
@@ -70,12 +72,21 @@ public class SubjectManagementController implements Initializable {
     void delSubject(MouseEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Subject ob = table.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("!!!Xóa môn học!!!");
-            alert.setContentText("Bạn có chắc chắn muốn xóa môn học " + ob.getId() + " - " + ob.getName() + "?");
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                SubjectDAO.delete(ob);
-                updateSubjectListByTable();
+            List<Course> check = CourseDAO.getAllCourseBySbj(ob.getId());
+            if (check.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("!!!Xóa môn học!!!");
+                alert.setContentText("Bạn có chắc chắn muốn xóa môn học " + ob.getId() + " - " + ob.getName() + "?");
+                if (alert.showAndWait().get() == ButtonType.OK) {
+                    SubjectDAO.delete(ob);
+                    updateSubjectListByTable();
+                }
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("!!!Không thể xóa môn học này!!!");
+                alert.setContentText("Tồn tại học phần đăng kí dựa trên môn học này!!!");
+                alert.showAndWait();
             }
         }
     }

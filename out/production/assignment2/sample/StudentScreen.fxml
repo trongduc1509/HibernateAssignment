@@ -23,7 +23,12 @@
                 </ImageView>
                 <FontAwesomeIconView fx:id="signOut" fill="#076eed" glyphName="SIGN_OUT" layoutX="831.0" layoutY="85.0" onMouseClicked="#logOut" size="30.0" />
                 <FontAwesomeIconView fx:id="curAccount" fill="#076eed" glyphName="USER" layoutX="779.0" layoutY="85.0" onMouseClicked="#checkAccount" size="30.0" />
-            <Label fx:id="curUser" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="703.0" layoutY="14.0" prefHeight="37.0" prefWidth="180.0" textAlignment="CENTER" textFill="#076eed">
+            <Label fx:id="curUser" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="703.0" layoutY="14.0" prefHeight="37.0" prefWidth="180.0" textAlignment="CENTER" textFill="#076eed" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="curSemester" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="621.0" layoutY="99.0" prefHeight="37.0" prefWidth="262.0" textAlignment="CENTER" textFill="#076eed" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

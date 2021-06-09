@@ -13,12 +13,13 @@ public class CourseView {
     private String session;
     private Integer semesterId;
     private Integer maxSlot;
+    private Integer registedSlot;
     private CheckBox select;
 
     public CourseView() {
     }
 
-    public CourseView(int courseId, String subjectId, String subjectName, Integer credits, String teacher, String room, String day, String session, Integer semesterId, Integer maxSlot) {
+    public CourseView(int courseId, String subjectId, String subjectName, Integer credits, String teacher, String room, String day, String session, Integer semesterId, Integer maxSlot, Integer registedSlot) {
         this.courseId = courseId;
         this.subjectId = subjectId;
         this.subjectName = subjectName;
@@ -29,6 +30,7 @@ public class CourseView {
         this.session = session;
         this.semesterId = semesterId;
         this.maxSlot = maxSlot;
+        this.registedSlot = registedSlot;
         this.select = new CheckBox();
     }
 
@@ -76,6 +78,10 @@ public class CourseView {
         return select;
     }
 
+    public Integer getRegistedSlot() {
+        return registedSlot;
+    }
+
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
@@ -118,5 +124,9 @@ public class CourseView {
 
     public void setSelect(CheckBox select) {
         this.select = select;
+    }
+
+    public void setRegistedSlot(Integer registedSlot) {
+        this.registedSlot = registedSlot;
     }
 }

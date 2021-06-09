@@ -44,6 +44,21 @@ public class SemesterDAO {
         return semSearchList;
     }
 
+    public static Semester getSemesterById(Integer idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Semester> semSearchList = null;
+        try {
+            final String hql = "from Semester where id = " + idFind;
+            Query query = session.createQuery(hql);
+            semSearchList = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return (semSearchList.isEmpty()) ? null : semSearchList.get(0);
+    }
+
     public static Semester getDeterminedSemester(String nameFind, int yearFind) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Semester> semSearchList = null;

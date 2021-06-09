@@ -67,6 +67,53 @@ public class CourseDAO {
         return resList;
     }
 
+    public static List<Course> getAllCourseBySbj(String subj) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Course> resList = null;
+        try {
+            final String hql = "from Course where subjectId = '" + subj + "'";
+            Query query = session.createQuery(hql);
+            resList = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return resList;
+    }
+
+    public static List<Course> getAllCourseRegistedByStudent(String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Course> resList = null;
+        try {
+            final String hql = "select c from Course c, RegistSubject rs where rs.courseId = c.courseId " +
+                    "and rs.student = '" + idFind + "'";
+            Query query = session.createQuery(hql);
+            resList = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return resList;
+    }
+
+    public static List<Course> getAllCourseRegistedByStudentAndSem(String idFind, Integer idSem) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Course> resList = null;
+        try {
+            final String hql = "select c from Course c, RegistSubject rs where rs.courseId = c.courseId " +
+                    "and c.semesterId = " + idSem + " and rs.student = '" + idFind + "'";
+            Query query = session.createQuery(hql);
+            resList = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return resList;
+    }
+
     public static List<Course> getAllCourseBySemesterAndSbj(Integer idFind, String subj) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Course> resList = null;

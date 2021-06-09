@@ -25,6 +25,21 @@ public class RegistSubjectDAO {
         return resList;
     }
 
+    public static int countCurrentSlotInCourse(Integer idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        int res = 0;
+        try {
+            final String hql = "select count(*) from RegistSubject where courseId = " + idFind;
+            Query query = session.createQuery(hql);
+            res = ((Long)query.getSingleResult()).intValue();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return res;
+    }
+
     public static void add(RegistSubject temp) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {

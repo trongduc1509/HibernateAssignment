@@ -83,7 +83,7 @@ public class AddingCourseController {
     public boolean checkSimilarity(Course temp) {
         checkList = CourseDAO.getAllCourseBySemester(curSem.getId());
         for (Course item : checkList) {
-            if (temp.getDay().compareTo(item.getDay()) == 0 && temp.getRoom().compareTo(item.getRoom()) == 0 && temp.getSemesterId().equals(item.getSemesterId()))
+            if (temp.getDay().compareTo(item.getDay()) == 0 && temp.getRoom().compareTo(item.getRoom()) == 0 && temp.getSessionId().equals(item.getSessionId()))
                 return true;
         }
         return false;

@@ -59,9 +59,17 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </VBox.margin>
                 </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#detail" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="CHI TIẾT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
                 <AnchorPane prefHeight="137.0" prefWidth="158.0" style="-fx-background-color: #D9E4EC;">
                     <children>
                         <Label layoutX="5.0" layoutY="14.0" prefHeight="29.0" prefWidth="154.0" text="Tìm HP theo id môn học:" textFill="#003060">
@@ -78,18 +86,19 @@
         </VBox>
     </right>
     <center>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <ScrollPane prefHeight="546.0" prefWidth="938.0" BorderPane.alignment="CENTER">
             <content>
                 <TableView fx:id="table" prefHeight="549.0" prefWidth="907.0">
                     <columns>
                         <TableColumn fx:id="idColumn" editable="false" prefWidth="78.0" resizable="false" text="Mã Môn Học" />
-                        <TableColumn fx:id="nameColumn" editable="false" prefWidth="223.00003051757812" resizable="false" text="Tên Môn Học" />
+                        <TableColumn fx:id="nameColumn" editable="false" prefWidth="206.00003051757812" resizable="false" text="Tên Môn Học" />
                         <TableColumn fx:id="creditsColumn" editable="false" prefWidth="61.0" resizable="false" text="Số Tín Chỉ" />
-                        <TableColumn fx:id="teacherColumn" editable="false" minWidth="8.0" prefWidth="253.0" resizable="false" text="Giáo Viên Lý Thuyết" />
-                        <TableColumn fx:id="roomColumn" editable="false" prefWidth="55.0" resizable="false" text="Phòng" />
-                        <TableColumn fx:id="dayColumn" editable="false" prefWidth="44.0" resizable="false" text="Thứ" />
-                  <TableColumn fx:id="sessionColumn" prefWidth="124.0" resizable="false" text="Ca" />
+                        <TableColumn fx:id="teacherColumn" editable="false" minWidth="8.0" prefWidth="223.0" resizable="false" text="Giáo Viên Lý Thuyết" />
+                        <TableColumn fx:id="roomColumn" editable="false" prefWidth="54.0" resizable="false" text="Phòng" />
+                        <TableColumn fx:id="dayColumn" editable="false" prefWidth="45.0" resizable="false" text="Thứ" />
+                  <TableColumn fx:id="sessionColumn" prefWidth="120.0" resizable="false" text="Ca" />
                   <TableColumn fx:id="slotColumn" prefWidth="67.0" resizable="false" text="Slot Tối Đa" />
+                  <TableColumn fx:id="currentColumn" prefWidth="52.0" text="Hiện Có" />
                     </columns>
                 </TableView>
             </content>

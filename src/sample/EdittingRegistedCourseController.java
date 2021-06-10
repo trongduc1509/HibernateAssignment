@@ -16,12 +16,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.BatchUpdateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class RegistCourseController implements Initializable {
+public class EdittingRegistedCourseController implements Initializable {
     private Person curAcc;
     private Semester curSem;
 
@@ -29,9 +28,7 @@ public class RegistCourseController implements Initializable {
     private Scene scene;
 
     private ObservableList<CourseView> mainList = FXCollections.observableArrayList();
-    private List<Course> funcCList = null;
     private List<Course> funcCRList = null;
-    private List<Course> funcCSList = null;
 
     @FXML
     private Label curUser;
@@ -86,7 +83,34 @@ public class RegistCourseController implements Initializable {
     public void setCurSemester(Semester temp) {
         curSem = temp;
         curSemester.setText("Học kì hiện tại: " + curSem.getName() + " - " + curSem.getYear());
-        updateCourseRegisterList();
+        updateCourseRegistedList();
+    }
+
+    @FXML
+    void cancel(MouseEvent event) {
+        List<RegistSubject> checkList = RegistSubjectDAO.getListByStuAndSem(curAcc.getId(), curSem.getId());
+        List<CourseView> cancelList = new ArrayList<>();
+        for (CourseView item : mainList) {
+            if (item.getSelect().isSelected())
+                cancelList.add(item);
+        }
+        if (!cancelList.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("!!!Xác nhận hủy đăng kí học phần!!!");
+            alert.setContentText("Bạn có chắc chắn muốn hủy đăng kí những học phần đã chọn không?");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+                for (CourseView item : cancelList) {
+                    for (RegistSubject check : checkList) {
+                        if (item.getCourseId() == check.getCourseId()) {
+                            RegistSubjectDAO.delete(check);
+                            checkList.remove(check);
+                            break;
+                        }
+                    }
+                }
+                updateCourseRegistedList();
+            }
+        }
     }
 
     @FXML
@@ -101,84 +125,12 @@ public class RegistCourseController implements Initializable {
         lC.loadLogOut(event, stage, scene);
     }
 
-    @FXML
-    void regist(MouseEvent event) throws Exception {
-        List<CourseView> newRegisted = new ArrayList<>();
-        for (CourseView item : mainList) {
-            if (item.getSelect().isSelected() && !item.getSelect().isDisable())
-                newRegisted.add(item);
-        }
-        if (!newRegisted.isEmpty()) {
-            Alert alert;
-            if (funcCRList.size() + newRegisted.size() > 8) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("!!!Lỗi đăng kí học phần!!!");
-                alert.setContentText("Không thể đăng kí quá 8 môn cho một học kì!!!");
-                alert.showAndWait();
-                updateCourseRegisterList();
-            }
-            else {
-                for (CourseView item : newRegisted) {
-                    for (CourseView temp : newRegisted) {
-                        if (item.getCourseId() != temp.getCourseId() && ((item.getDay().compareTo(temp.getDay()) == 0 && item.getSession().compareTo(temp.getSession()) == 0) || item.getSubjectId().compareTo(temp.getSubjectId()) == 0)) {
-                            alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("!!!Lỗi đăng kí học phần!!!");
-                            alert.setContentText("Các học phần chuẩn bị đăng kí không hợp lệ (Trùng ngày, giờ hoặc trùng môn học)!!!");
-                            alert.showAndWait();
-                            return;
-                        }
-                    }
-
-                    for (Course temp : funcCRList) {
-                        if (item.getSubjectId().compareTo(temp.getSubjectId()) == 0 || (item.getDay().compareTo(temp.getDay()) == 0 && item.getSession().compareTo(SessionDAO.getDeterminedSession(temp.getSessionId()).toString()) == 0)) {
-                            alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("!!!Lỗi đăng kí học phần!!!");
-                            alert.setContentText("Các học phần chuẩn bị đăng kí trùng ngày và giờ hoặc môn học với các học phần đã đăng kí!!!");
-                            alert.showAndWait();
-                            return;
-                        }
-                    }
-                }
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("!!!Xác nhận đăng kí học phần!!!");
-                alert.setContentText("Bạn có chắc chắn muốn đăng kí những học phần đã chọn không?");
-                if (alert.showAndWait().get() == ButtonType.OK) {
-                    for (CourseView item : newRegisted) {
-                        RegistSubject newR = new RegistSubject();
-                        newR.setCourseId(item.getCourseId());
-                        newR.setStudent(curAcc.getId());
-                        RegistSubjectDAO.add(newR);
-                    }
-                    updateCourseRegisterList();
-                }
-            }
-        }
-    }
-
-    void updateCourseRegisterList() {
+    void updateCourseRegistedList() {
         mainList.clear();
-        funcCList = CourseDAO.getAllCourseBySemester(curSem.getId());
         funcCRList = CourseDAO.getAllCourseRegistedByStudentAndSem(curAcc.getId(), curSem.getId());
-        funcCSList = CourseDAO.getAllCourseRegistedByStudent(curAcc.getId());
-        for (Course item : funcCList) {
+        for (Course item : funcCRList) {
             Subject temp = SubjectDAO.getDeteminedSubject(item.getSubjectId());
-            CourseView newCV = new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot(), RegistSubjectDAO.countCurrentSlotInCourse(item.getCourseId()));
-            if (newCV.getMaxSlot() == newCV.getRegistedSlot())
-                newCV.getSelect().setDisable(true);
-            for (Course comp : funcCRList) {
-                if (newCV.getCourseId() == comp.getCourseId()) {
-                    newCV.getSelect().setSelected(true);
-                    newCV.getSelect().setDisable(true);
-                    break;
-                }
-            }
-            mainList.add(newCV);
-        }
-
-        for (Course item : funcCSList) {
-            for (CourseView temp : mainList)
-            if (item.getSubjectId().compareTo(temp.getSubjectId()) == 0)
-                temp.getSelect().setDisable(true);
+            mainList.add(new CourseView(item.getCourseId(), item.getSubjectId(), temp.getName(), temp.getCredits(), item.getTeacher(), item.getRoom(), item.getDay(), SessionDAO.getDeterminedSession(item.getSessionId()).toString(), item.getSemesterId(), item.getMaxSlot(), RegistSubjectDAO.countCurrentSlotInCourse(item.getCourseId())));
         }
 
         idColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("subjectId"));

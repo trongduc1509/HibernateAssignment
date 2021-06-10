@@ -23,18 +23,18 @@
                         <Image url="@../LogoHCMUS.png" />
                     </image>
                 </ImageView>
-                <FontAwesomeIconView fill="#076eed" glyphName="SIGN_OUT" layoutX="1038.0" layoutY="85.0" onMouseClicked="#logOut" size="30.0" />
-                <FontAwesomeIconView fill="#076eed" glyphName="LONG_ARROW_LEFT" layoutX="994.0" layoutY="85.0" onMouseClicked="#getBack" size="30.0" />
-                <Label fx:id="curUser" alignment="CENTER_RIGHT" layoutX="886.0" layoutY="14.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed" wrapText="true">
+                <FontAwesomeIconView fill="#076eed" glyphName="SIGN_OUT" layoutX="1078.0" layoutY="86.0" onMouseClicked="#logOut" size="30.0" />
+                <FontAwesomeIconView fill="#076eed" glyphName="LONG_ARROW_LEFT" layoutX="1035.0" layoutY="85.0" onMouseClicked="#getBack" size="30.0" />
+                <Label fx:id="curUser" alignment="CENTER_RIGHT" layoutX="926.0" layoutY="14.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed" wrapText="true">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font></Label>
-                <Label fx:id="curSemester" alignment="CENTER_RIGHT" layoutX="886.0" layoutY="99.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed" wrapText="true">
+                <Label fx:id="curSemester" alignment="CENTER_RIGHT" layoutX="926.0" layoutY="94.0" prefHeight="37.0" prefWidth="180.0" textFill="#076eed" wrapText="true">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="curUser1" alignment="CENTER" layoutX="348.0" layoutY="56.0" prefHeight="37.0" prefWidth="385.0" text="ĐĂNG KÝ HỌC PHẦN" textFill="#076eed" wrapText="true">
+                <Label fx:id="curUser1" alignment="CENTER" layoutX="368.0" layoutY="57.0" prefHeight="37.0" prefWidth="385.0" text="ĐĂNG KÝ HỌC PHẦN" textFill="#076eed" wrapText="true">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
@@ -45,6 +45,14 @@
     <right>
         <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="158.0" style="-fx-background-color: #D4F1F4;" BorderPane.alignment="CENTER">
             <children>
+            <Label fx:id="info" prefHeight="34.0" prefWidth="147.0" textFill="#076eed">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
                 <Button mnemonicParsing="false" onMouseClicked="#regist" prefHeight="61.0" prefWidth="162.0" style="-fx-background-color: #189AB4;" text="ĐĂNG KÍ" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
@@ -67,9 +75,9 @@
                         <TableColumn fx:id="teacherColumn" editable="false" minWidth="8.0" prefWidth="212.0" resizable="false" text="Giáo Viên Lý Thuyết" />
                         <TableColumn fx:id="roomColumn" editable="false" prefWidth="51.0" resizable="false" text="Phòng" />
                         <TableColumn fx:id="dayColumn" editable="false" prefWidth="44.0" resizable="false" text="Thứ" />
-                        <TableColumn fx:id="sessionColumn" prefWidth="125.0" resizable="false" text="Ca" />
-                        <TableColumn fx:id="slotColumn" prefWidth="66.0" resizable="false" text="Slot Tối Đa" />
-                        <TableColumn fx:id="currentColumn" minWidth="8.0" prefWidth="51.0" text="Hiện Có" />
+                        <TableColumn fx:id="sessionColumn" editable="false" prefWidth="125.0" resizable="false" text="Ca" />
+                        <TableColumn fx:id="slotColumn" editable="false" prefWidth="66.0" resizable="false" text="Slot Tối Đa" />
+                        <TableColumn fx:id="currentColumn" editable="false" minWidth="8.0" prefWidth="51.0" resizable="false" text="Hiện Có" />
                   <TableColumn fx:id="selectColumn" prefWidth="50.0" resizable="false" text="Chọn" />
                     </columns>
                 </TableView>

@@ -25,6 +25,22 @@ public class RegistSubjectDAO {
         return resList;
     }
 
+    public static List<RegistSubject> getListByStuAndSem(String idFind, Integer sem) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<RegistSubject> resList = null;
+        try {
+            final String hql = "select rs from RegistSubject rs, Course c where rs.courseId = c.courseId "
+                    + "and c.semesterId = " + sem + " and rs.student = '" + idFind + "'";
+            Query query = session.createQuery(hql);
+            resList = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return resList;
+    }
+
     public static int countCurrentSlotInCourse(Integer idFind) {
         session = HibernateUtil.getSessionFactory().openSession();
         int res = 0;

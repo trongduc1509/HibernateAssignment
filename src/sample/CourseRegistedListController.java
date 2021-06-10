@@ -46,6 +46,9 @@ public class CourseRegistedListController implements Initializable {
     private ComboBox<Semester> semList;
 
     @FXML
+    private Label info;
+
+    @FXML
     private TableView<CourseView> table;
 
     @FXML
@@ -116,6 +119,8 @@ public class CourseRegistedListController implements Initializable {
         sessionColumn.setCellValueFactory(new PropertyValueFactory<CourseView, String>("session"));
 
         table.setItems(mainList);
+
+        info.setText("Số HP đã đăng kí: " + funcList.size());
     }
 
     @Override

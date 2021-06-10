@@ -68,7 +68,6 @@ public class ClassInfoController implements Initializable {
 
     private ObservableList<PersonInfo> studentList = FXCollections.observableArrayList();
     private List<Person> funcList = null;
-    private List<ClazzInfo> stuInClazz;
 
     public void setCurUser(Person cur) {
         curAcc = cur;
@@ -84,7 +83,6 @@ public class ClassInfoController implements Initializable {
     public void setCurClass(Clazz temp) {
         curClass = temp;
         curClassroom.setText("LỚP: " + curClass.getId());
-        stuInClazz = ClazzInfoDAO.getAllInfoByClazz(curClass.getId());
         updateStudentListByTable();
     }
 
@@ -111,8 +109,28 @@ public class ClassInfoController implements Initializable {
     }
 
     @FXML
-    void courseRegisted(MouseEvent event) {
-
+    void subjectRegisted(MouseEvent event) throws Exception {
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            PersonInfo ob = table.getSelectionModel().getSelectedItem();
+            Person curStu = PersonDAO.searchSingleStudentById(ob.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentSubjectList.fxml"));
+            loader.load();
+            StudentSubjectListController sSLC = loader.getController();
+            sSLC.setCurUser(curAcc);
+            sSLC.setCurSemester(curSem);
+            sSLC.setCurClass(curClass);
+            sSLC.setCurStu(curStu);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Image icon = new Image("OIP.png");
+            stage.getIcons().add(icon);
+            stage.setTitle("HCMUS Portal");
+            scene = new Scene(loader.getRoot());
+            stage.setScene(scene);
+            stage.setResizable(Boolean.FALSE);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        }
     }
 
     @FXML
@@ -124,9 +142,8 @@ public class ClassInfoController implements Initializable {
             alert.setHeaderText("!!!Xóa sinh viên khỏi lớp học!!!");
             alert.setContentText("Bạn có chắc chắn muốn xóa sinh viên " + student.getId() + " khỏi lớp " + curClass.getId() + " không?");
             if (alert.showAndWait().get() == ButtonType.OK) {
-                PersonDAO.delete(PersonDAO.searchSingleStudentById(student.getId()));
-
                 ClazzInfo delOb = new ClazzInfo();
+                List<ClazzInfo> stuInClazz = ClazzInfoDAO.getAllInfoByClazz(curClass.getId());
                 for (ClazzInfo temp : stuInClazz) {
                     if (temp.getStudentId().compareTo(student.getId()) == 0) {
                         delOb = temp;
@@ -141,6 +158,8 @@ public class ClassInfoController implements Initializable {
                 else
                     curClass.setFemale(curClass.getFemale() - 1);
                 ClazzDAO.update(curClass);
+
+                PersonDAO.delete(PersonDAO.searchSingleStudentById(student.getId()));
 
                 updateStudentListByTable();
             }

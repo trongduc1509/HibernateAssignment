@@ -128,9 +128,26 @@ public class CourseManagementController implements Initializable {
     }
 
     @FXML
-    void detail(MouseEvent event) {
+    void detail(MouseEvent event) throws Exception {
         if (table.getSelectionModel().getSelectedItem() != null) {
-
+            CourseView ob = table.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseRegistedStudents.fxml"));
+            loader.load();
+            CourseRegistedStudentsController cRSC = loader.getController();
+            cRSC.setCurC(ob);
+            stage = new Stage();
+            Image icon = new Image("OIP.png");
+            stage.getIcons().add(icon);
+            stage.setTitle("HCMUS Portal");
+            scene = new Scene(loader.getRoot());
+            stage.setScene(scene);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(curUser.getScene().getWindow());
+            stage.setResizable(Boolean.FALSE);
+            stage.showAndWait();
         }
     }
 

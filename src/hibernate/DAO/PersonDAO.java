@@ -177,4 +177,20 @@ public class PersonDAO {
         }
         return listFindedStu;
     }
+
+    public static List<Person> getAllStudentRegistCourse(Integer iCFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Person> listFindedStu = null;
+        try {
+            final String hql = "select p from Person p, RegistSubject rs where p.id = rs.student " +
+                    "and rs.courseId = " + iCFind;
+            Query query = session.createQuery(hql);
+            listFindedStu = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return listFindedStu;
+    }
 }

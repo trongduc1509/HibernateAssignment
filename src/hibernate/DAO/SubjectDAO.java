@@ -25,6 +25,22 @@ public class SubjectDAO {
         return subjectList;
     }
 
+    public static List<Subject> getAllSubjectOfStudent(String idFind) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Subject> listFindedSubject = null;
+        try {
+            final String hql = "select s from RegistSubject rs, Course c, Subject s where rs.student = '" + idFind +"' "
+                    + "and rs.courseId = c.courseId and c.subjectId = s.id";
+            Query query = session.createQuery(hql);
+            listFindedSubject = query.list();
+        } catch (HibernateException e) {
+            System.err.println(e);
+        } finally {
+            session.close();
+        }
+        return listFindedSubject;
+    }
+
     public static List<Subject> searchSubjectById(String idFind) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Subject> listFindedSubject = null;

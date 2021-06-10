@@ -87,8 +87,22 @@ public class StudentScreenController implements Initializable {
     }
 
     @FXML
-    void courseErase(MouseEvent event) {
-
+    void courseErase(MouseEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EdittingRegistedCourse.fxml"));
+        loader.load();
+        EdittingRegistedCourseController eRCC = loader.getController();
+        eRCC.setCurUser(curUserAcc);
+        eRCC.setCurSemester(curSem);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Image icon = new Image("OIP.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("HCMUS Portal");
+        scene = new Scene(loader.getRoot());
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     @FXML

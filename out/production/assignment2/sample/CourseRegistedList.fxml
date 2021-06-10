@@ -67,6 +67,14 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Label fx:id="info" prefHeight="34.0" prefWidth="147.0" textFill="#076eed">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
         </VBox>
     </right>

@@ -98,7 +98,7 @@
                         <TableColumn fx:id="dayColumn" editable="false" prefWidth="45.0" resizable="false" text="Thứ" />
                   <TableColumn fx:id="sessionColumn" prefWidth="120.0" resizable="false" text="Ca" />
                   <TableColumn fx:id="slotColumn" prefWidth="67.0" resizable="false" text="Slot Tối Đa" />
-                  <TableColumn fx:id="currentColumn" prefWidth="52.0" text="Hiện Có" />
+                  <TableColumn fx:id="currentColumn" prefWidth="51.0" text="Hiện Có" />
                     </columns>
                 </TableView>
             </content>

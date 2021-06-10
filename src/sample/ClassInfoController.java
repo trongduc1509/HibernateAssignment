@@ -3,6 +3,7 @@ package sample;
 import hibernate.DAO.ClazzDAO;
 import hibernate.DAO.ClazzInfoDAO;
 import hibernate.DAO.PersonDAO;
+import hibernate.DAO.RegistSubjectDAO;
 import hibernate.POJO.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,30 +139,39 @@ public class ClassInfoController implements Initializable {
         if (table.getSelectionModel().getSelectedItem() != null) {
             PersonInfo student = table.getSelectionModel().getSelectedItem();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("!!!Xóa sinh viên khỏi lớp học!!!");
-            alert.setContentText("Bạn có chắc chắn muốn xóa sinh viên " + student.getId() + " khỏi lớp " + curClass.getId() + " không?");
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                ClazzInfo delOb = new ClazzInfo();
-                List<ClazzInfo> stuInClazz = ClazzInfoDAO.getAllInfoByClazz(curClass.getId());
-                for (ClazzInfo temp : stuInClazz) {
-                    if (temp.getStudentId().compareTo(student.getId()) == 0) {
-                        delOb = temp;
-                        break;
+            List<RegistSubject> check = RegistSubjectDAO.getListByStu(student.getId());
+            if (check.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("!!!Xóa sinh viên khỏi lớp học!!!");
+                alert.setContentText("Bạn có chắc chắn muốn xóa sinh viên " + student.getId() + " khỏi lớp " + curClass.getId() + " không?");
+                if (alert.showAndWait().get() == ButtonType.OK) {
+                    ClazzInfo delOb = new ClazzInfo();
+                    List<ClazzInfo> stuInClazz = ClazzInfoDAO.getAllInfoByClazz(curClass.getId());
+                    for (ClazzInfo temp : stuInClazz) {
+                        if (temp.getStudentId().compareTo(student.getId()) == 0) {
+                            delOb = temp;
+                            break;
+                        }
                     }
+                    ClazzInfoDAO.delete(delOb);
+
+                    curClass.setTotal(curClass.getTotal() - 1);
+                    if (student.getGender().compareTo("Nam") == 0)
+                        curClass.setMale(curClass.getMale() - 1);
+                    else
+                        curClass.setFemale(curClass.getFemale() - 1);
+                    ClazzDAO.update(curClass);
+
+                    PersonDAO.delete(PersonDAO.searchSingleStudentById(student.getId()));
+
+                    updateStudentListByTable();
                 }
-                ClazzInfoDAO.delete(delOb);
-
-                curClass.setTotal(curClass.getTotal() - 1);
-                if (student.getGender().compareTo("Nam") == 0)
-                    curClass.setMale(curClass.getMale() - 1);
-                else
-                    curClass.setFemale(curClass.getFemale() - 1);
-                ClazzDAO.update(curClass);
-
-                PersonDAO.delete(PersonDAO.searchSingleStudentById(student.getId()));
-
-                updateStudentListByTable();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("!!!Lỗi xóa sinh viên!!!");
+                alert.setContentText("Không thể xóa sinh viên đã đăng kí học phần!!!");
+                alert.showAndWait();
             }
         }
     }

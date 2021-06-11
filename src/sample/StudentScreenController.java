@@ -88,21 +88,37 @@ public class StudentScreenController implements Initializable {
 
     @FXML
     void courseErase(MouseEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EdittingRegistedCourse.fxml"));
-        loader.load();
-        EdittingRegistedCourseController eRCC = loader.getController();
-        eRCC.setCurUser(curUserAcc);
-        eRCC.setCurSemester(curSem);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Image icon = new Image("OIP.png");
-        stage.getIcons().add(icon);
-        stage.setTitle("HCMUS Portal");
-        scene = new Scene(loader.getRoot());
-        stage.setScene(scene);
-        stage.setResizable(Boolean.FALSE);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        if (curSem == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("!!!Không thể chỉnh sửa đăng kí học phần!!!");
+            alert.setContentText("Giáo vụ chưa set học kì hiện tại!!!");
+            alert.showAndWait();
+            return;
+        }
+        if (CrsDAO.checkCanRegist(curSem.getId())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EdittingRegistedCourse.fxml"));
+            loader.load();
+            EdittingRegistedCourseController eRCC = loader.getController();
+            eRCC.setCurUser(curUserAcc);
+            eRCC.setCurSemester(curSem);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Image icon = new Image("OIP.png");
+            stage.getIcons().add(icon);
+            stage.setTitle("HCMUS Portal");
+            scene = new Scene(loader.getRoot());
+            stage.setScene(scene);
+            stage.setResizable(Boolean.FALSE);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("!!!Không thể chỉnh sửa đăng kí học phần!!!");
+            alert.setContentText("Không tồn tại kì đăng kí học phần nào hiện tại / hết thời hạn đăng kí (chỉnh sửa) học phần!!!");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
